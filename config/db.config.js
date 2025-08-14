@@ -3,7 +3,7 @@ const util = require('util');
 
 const db = createPool({
   port: 3306,
-  host: "db-1",
+  host: "db-1", //change to "localhost" for local
   user: "blab",
   password: "z2^E6J4$;u;d",
   database: "blab",

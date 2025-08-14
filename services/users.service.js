@@ -399,10 +399,12 @@ exports.register = async (data, callback) => {
 		// /* START EXAMPLE VULNERABILITY */
 		// // Execute the query
 		mysqlCurrentDateTime = moment().format("YYYY-MM-DD HH:mm:ss")
+    // Create user hashed password
+    const userToken = crypto.createHash('md5').update(password).digest("hex")
 
 		let query = "insert into users (username, password, totp_secret, created_at, real_name, blab_name) values(";
 		query += "'" + username + "',";
-		query += "'" + crypto.createHash('md5').update(password).digest("hex") + "',";
+		query += "'" + userToken + "',";
 		query += "'" + speakeasy.generateSecret({ length: 20 }).base32 + "',";
 		query += "'" + mysqlCurrentDateTime + "',";
 		query += "'" + realName + "',";
@@ -418,7 +420,7 @@ exports.register = async (data, callback) => {
         console.log('error occurred');
         return callback(error);
       }
-      return callback(null, [{'username': username}]);
+      return callback(null, [{'username': username, "auth token":""+userToken+""}]);
     });
 		// /* END EXAMPLE VULNERABILITY */
 	} catch (err) {

@@ -156,10 +156,10 @@ exports.userLogin = (req, res, next) => {
   console.log('POST /users/login')
   console.log('Request Data: '+JSON.stringify(req.body))
   //check user
-  if ( req.user.toLowerCase() != req.body.username.toLowerCase()){
-    console.log('Requesting password for a different user, request forbidden')
-    return res.status(403).send({ success: 0, data: "Forbidden" });
-  }
+  // if ( req.user.toLowerCase() != req.body.username.toLowerCase()){
+  //   console.log('Requesting password for a different user, request forbidden')
+  //   return res.status(403).send({ success: 0, data: "Forbidden" });
+  // }
   //check required parameters
   if ( typeof req.body.username == 'undefined' || typeof req.body.password == 'undefined' ){
     return res.status(400).send({

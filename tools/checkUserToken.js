@@ -2,9 +2,15 @@ const {db} = require("../config/db.config");
 
 module.exports = (req, res, next) => {
     const authHeader = req.headers['authorization']
-    if ( authHeader == null ) {
+    const regexp = /^Token:\s[\w\W]*_[\w\W]*$/
+    if ( authHeader == 'undefined' ) {
         return res.status(401).send({ success: 0, data: "Unauthenticated" });
     }
+    if (!regexp.test(authHeader)) {
+        return res.status(401).send({ success: 0, data: "Bad token format" });
+    }
+
+    // Format checking done
     const myToken = authHeader.split(': ')
     console.log('Check user auth with token:')
     console.log("===========================")

@@ -107,13 +107,12 @@ exports.getBlabComments = (data, callback) => {
 
 exports.deleteBlab = (data, callback) => {
   db.query(
-    //bad code SQLi
-    `DELETE FROM blabs WHERE blabid = "`+data.blabId+`"`,
-
-    //good code
-    //`DELETE FROM blabs WHERE blabid = ?`,
-    [data.blabId],
-    (error, results, fields) => {
+  //bad code SQLi
+  `DELETE FROM blabs WHERE blabid =?`,
+  //good code
+  //`DELETE FROM blabs WHERE blabid =?`,
+  [data.blabId],
+  (error, results, fields) => {
       if (error) {
         return callback(error);
       }

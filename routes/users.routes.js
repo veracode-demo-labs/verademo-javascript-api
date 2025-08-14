@@ -387,7 +387,7 @@ router.get("/getUser", checkUser, usersController.getUser);
  *       '400':
  *           description: Bad request
 */
-router.post("/login", checkUser, usersController.userLogin);
+router.post("/login", usersController.userLogin);
 
 
 module.exports = router;
